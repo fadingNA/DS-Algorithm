@@ -1,0 +1,22 @@
+def insert(self, key, value):
+		if (self.search(key)!=None):				# 1
+			return False							# 1
+
+		if(len(self) == self.cap):					# 1
+			# increase the capacity if list is full
+			new_table = [None for i in range(self.cap*2)]  # 1 + 2(n - 1)
+			for i in range(self.cap): 1 + n
+				new_table[i]=self.the_table[i] 1(n-1)
+			self.the_table = new_table + 1
+			self.cap *= 2 + 1
+
+
+		self.the_table[len(self)]=self.Record(key,value) + 3
+		size = len(self) + 2
+		for i in range (0,size-1): 1 + 1(n-1)
+			for j in range(0,size-1-i): 
+				if(self.the_table[j].key>self.the_table[j+1].key):
+					tmp=self.the_table[j]
+					self.the_table[j]=self.the_table[j+1]
+					self.the_table[j+1]=tmp
+		return True

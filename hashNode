@@ -1,0 +1,83 @@
+
+
+class HashMap:
+	class Hashnode:
+		def __init__(self, key= None, value = None):
+			self.key = key
+			self.value = value
+	def __init__(self, cap = 32):
+		self.cap = cap
+		self.length = 0
+		self.arr = [None] * self.cap
+		#dummy node
+		self.dummy = self.Hashnode(-1,-1)
+
+	def hashCode(self, key):
+		# to decide select the slot of key
+		return key % self.cap 
+
+	def insertNode(self, key , value):
+		# initialize new temporary variable
+		tmp = self.Hashnode(key, value)
+		index = self.hashCode(key)
+		# find next free space
+		while self.arr[index] is not None and self.arr[index].key != key:
+			index += 1
+			index %= self.cap
+		# if new node to be inserted, increase the current size
+		if self.arr[index] is None or self.arr[index].key == -1:
+			self.length += 1
+		self.arr[index] = tmp
+
+	def deleteNode(self, key):
+		# Apply hash function to find index for given key
+		index = self.hashCode(key)
+		# finding the node iwth given key
+		while self.arr[index] is not None:
+			if self.arr[index].keys == key:
+				temp = self.arr[index]
+				# insert dummy node here for further use.
+				self.arr[index] = self.dummy
+				# reduce size
+				self.size -= 1
+				return temp.values
+			index += 1
+			index %= self.cap
+		# ifn ot found return None
+		return None
+
+	def get(self, key):
+		index = self.hashCode(key)
+		count = 0
+		while self.arr[index]:
+			if count > self.cap:
+				return None
+			# if node found return its value
+			if self.arr[index].key == key:
+				return self.arr[index].value
+			index += 1
+			index %= self.cap
+			count += 1
+			# if not found return 0
+		return 0
+	def isEmpty(self):
+		return self.size == 0
+
+	def display(self):
+		for i in range(self.cap):
+			if self.arr[i] and self.arr[i].key != -1:
+				print("key = [:", self.arr[i].key, ":] value = [", self.arr[i].value, "] ")
+
+
+if __name__ == "__main__":
+	h = HashMap()
+	h.insertNode(1,1)
+	h.insertNode(3,4)
+	h.insertNode(4,5)
+	h.insertNode(2,3)
+	h.display()
+	
+	
+
+
+
