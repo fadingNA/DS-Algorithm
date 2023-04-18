@@ -15,6 +15,57 @@ class BST:
 
     def __init__(self):
         self.root = None
+        self.count = 0
+
+    # Consider a binary search tree BT and a value x. Write a method, count_less_than_x, in the class BT that will
+    # recursively count the number of nodes in the tree that have a value less than x. Use the in-order traversal
+    # approach of visiting the left subtree, then the current node, and then the right subtree.
+    def count_less_than_target(self, x):
+        self.count = 0
+        self.count_helper(self.root, x)
+        return self.count
+
+    def count_helper(self, node, x):
+        if node is None:
+            return
+        # Inorder -> Left -> Print -> Right
+        self.count_helper(node.l, x)
+        if node.data < x:
+            self.count += 1
+        self.count_helper(node.r, x)
+
+    def max_value(self):
+        def max_value_helper(node):
+            if node is None:
+                return
+            left_node = max_value_helper(node.l)
+            right_node = max_value_helper(node.r)
+            return max(left_node, right_node)
+
+        return max_value_helper(self.root)
+
+    def find_second_largest(self):
+        if self.root is None:
+            return None
+
+        def in_order_traversal(node, count):
+            if node is None:
+                return None
+
+            right_tree = in_order_traversal(node.r, count)
+            if right_tree is not None:
+                return right_tree
+
+            count[0] += 1
+            if count[0] == 2:
+                return node.data
+            return in_order_traversal(node.r, count)
+
+        count = [0]
+        second_largest = in_order_traversal(self.root, count)
+        if count[0] < 2:
+            return None
+        return second_largest
 
     def ins(self, data):
         if self.root is None:
@@ -175,8 +226,8 @@ class BST:
             if node is None:
                 return
             inOrder_print(node.l)
-            # if node.l is None and node.r is None:
-            print(node.data, end=" ")
+            if node.l is None and node.r is None:
+                print(node.data, end=" ")
             inOrder_print(node.r)
 
         inOrder_print(self.root)
@@ -205,4 +256,12 @@ if __name__ == "__main__":
     print("Even Node Sum <", root.sum_inOrder(root.root), ">")
     print("Min dif BST <", root.find_min_diff(8))
     root.print_leaf_node()
+    print("\nCounter less than target", root.count_less_than_target(15))
+    print("\n Max value of BST <", root.max_value(root.root), ">")
+    print("==========INSER AGAIN========")
+    root.ins(4)
+    root.ins(35)
+    root.ins(14)
+    print("\n Max value of BST <", root.max_value(root.root), ">")
+    print("\n Find second largest value <", root.find_second_largest(), ">")
     print("============================")
