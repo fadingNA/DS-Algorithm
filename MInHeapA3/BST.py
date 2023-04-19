@@ -17,6 +17,12 @@ class BST:
         self.root = None
         self.count = 0
 
+    def __str__(self):
+        return str(self.root)
+
+    def print(self):
+        return self.root.data
+
     # Consider a binary search tree BT and a value x. Write a method, count_less_than_x, in the class BT that will
     # recursively count the number of nodes in the tree that have a value less than x. Use the in-order traversal
     # approach of visiting the left subtree, then the current node, and then the right subtree.
@@ -24,6 +30,31 @@ class BST:
         self.count = 0
         self.count_helper(self.root, x)
         return self.count
+
+    def find_lowest_common_ancestor(self, value1, value2):
+        if self.root is None:
+            return None
+        return self.ancester_helper(self.root, value1, value2)
+
+    """
+    The find ancestor method first checks if the BST is empty or not
+    If it is it return None, Otherwise :
+    Call helper function method recursively on the root of the binary search tree.
+    The helper method caompares the given values " value 1 " and value 2 with the value
+    of the current node = (node.data) comepare to detemrine whether to continue searching in the 
+    left subtree or right subtree or if the current node is the lowest common ancestor. Once the
+    lowest common ancestor is found it is returnde by the method
+        """
+
+    def ancester_helper(self, node, value1, value2):
+        if node is None:
+            return None
+        if value1 < node.data and value2 < node.data:
+            return self.ancester_helper(node.left, value1, value2)
+        if value1 > node.data and value2 > node.data:
+            return self.ancester_helper(node.right, value1, value2)
+        else:
+            return None
 
     def count_helper(self, node, x):
         if node is None:
@@ -44,6 +75,10 @@ class BST:
 
         return max_value_helper(self.root)
 
+    # In this implementation, the find_second_largest method uses a recursive helper function _in_order_traversal to
+    # perform an in-order traversal of the binary search tree in reverse order (right, root, left) and keep track of
+    # the count of nodes visited. When the count becomes 2, the method returns the value of the node as the second-
+    # largest value in the tree. If the tree has fewer than 2 nodes, the method returns None.
     def find_second_largest(self):
         if self.root is None:
             return None
@@ -128,6 +163,25 @@ class BST:
                 queue.append(cur_node.l)
             if cur_node.r is not None:
                 queue.append(cur_node.r)
+
+    def search(self, data):
+        cur = self.root
+        while curr:
+            if data < cur:
+                cur = cur.left
+            if data > cur:
+                cur = cur.right
+            else:
+                return cur
+        return None
+
+    def search_inorder(self,data):
+        if self.root:
+            if data == self.search_inorder(self.root.l):
+                return True
+            if data == self.search_inorder(self.root.r):
+                return True
+
 
     def count_leaf_node(self):
         if not self.root:
