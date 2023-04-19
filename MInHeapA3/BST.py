@@ -175,13 +175,12 @@ class BST:
                 return cur
         return None
 
-    def search_inorder(self,data):
+    def search_inorder(self, data):
         if self.root:
             if data == self.search_inorder(self.root.l):
                 return True
             if data == self.search_inorder(self.root.r):
                 return True
-
 
     def count_leaf_node(self):
         if not self.root:
@@ -286,6 +285,25 @@ class BST:
 
         inOrder_print(self.root)
 
+    # Write a Python method in a class BST (Binary Search Tree) that takes in a target value as a parameter,
+    # and returns the number of nodes in the tree whose value is less than the target value.
+    # You must use the search method to first find the node with the target value
+    # (if it exists) and then traverse the left subtree of that node to count the number of nodes
+    # that are less than the target value.
+    def search_less_target(self, node, target):
+        count = [0]
+
+        def search_helper(node, target):
+            nonlocal count
+            if node is None:
+                return False
+            if node.data < target:
+                count[0] += 1
+            return search_helper(node.l, target) + search_helper(node.r, target)
+
+        search_helper(self.root, target)
+        return count[0]
+
 
 """
 Node => Null
@@ -318,4 +336,6 @@ if __name__ == "__main__":
     root.ins(14)
     print("\n Max value of BST <", root.max_value(root.root), ">")
     print("\n Find second largest value <", root.find_second_largest(), ">")
+    root.bfs()
+    print("\n Search Less value than target 12 <", root.search_less_target(root.root, 12), ">")
     print("============================")
