@@ -12,19 +12,19 @@ List the features of your repository, including any functionalities or capabilit
 
 ## Installation
 
-Provide instructions on how to install or set up your repository. Include any dependencies or prerequisites that users need to have installed, and step-by-step instructions on how to get your repository up and running.
+    > using GIT : gitclone --recursive https://github.com/fadingNA/DS-Algorithm
 
 ## Usage
 
-Explain how users can use your repository, including any commands, configurations, or settings they need to be aware of. Provide examples or screenshots if applicable.
+    > This is just a simple learning assistant for the BT/BST coding part of the final exam.
 
 ## Contributing
 
-Include information on how users can contribute to your repository, such as guidelines for submitting bug reports, feature requests, or pull requests. You can also include any contribution guidelines or coding standards that users should follow.
+    > NonNA
 
 ## License
 
-Specify the license under which your repository is released, along with any terms and conditions associated with its usage.
+    > Academic Free License V3.0
 
 ## Acknowledgements
 
@@ -32,8 +32,7 @@ Optional section to acknowledge any third-party libraries, tools, or contributio
 
 ## Contact
 
-Include contact information, such as email or social media handles, where users can reach out for support or questions.
-
+    > LinkedIN : Nonthachai Plodthong
 ---
 
 Feel free to customize this template to suit the needs of your repository. A well-written README can provide valuable information to users and make your repository more user-friendly and accessible.
